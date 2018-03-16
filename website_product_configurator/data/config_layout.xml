@@ -175,7 +175,7 @@
                       </input>
                     </label>
                     <div class="form-control col-xs-12" style="height: auto;">
-                        <img class="img-rounded img-responsive img-center mt8" t-att-src="('data:image/*;base64,' + value.product_id.sudo().image) if value.product_id.sudo().image else '/web/static/src/img/placeholder.png'"/>
+                        <img class="img-rounded img-responsive img-center mt8" t-att-src="('data:image/*;base64,' + value.product_id.sudo().image.decode('UTF-8')) if value.product_id.sudo().image else '/web/static/src/img/placeholder.png'"/>
                           <!-- TODO use currency from pricelist -->
                           <!-- TODO have tiles be the same height without forcing height -->
                           <div class="mt8">
