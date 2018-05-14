@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 
 import json
 import base64
@@ -82,12 +81,12 @@ class WebsiteProductConfig(http.Controller):
 
         parsed_attr_vals_dict = {
             int(k.split(self.attr_field_prefix)[1]): v
-            for k, v in parsed_vals['cfg_vals'].items()
+            for k, v in list(parsed_vals['cfg_vals'].items())
         }
 
         parsed_custom_vals_dict = {
             int(k.split(self.custom_attr_field_prefix)[1]): v
-            for k, v in parsed_vals['custom_vals'].items()
+            for k, v in list(parsed_vals['custom_vals'].items())
         }
 
         attr_vals_dict.update(parsed_vals['cfg_vals'])
@@ -116,7 +115,7 @@ class WebsiteProductConfig(http.Controller):
 
         json_config = self.get_json_config(product_tmpl, cfg_vals, config_step)
         cfg_val_ids = product_tmpl.flatten_val_ids(
-            json_config['attr_vals'].values())
+            list(json_config['attr_vals'].values()))
         attr_lines = product_tmpl.attribute_line_ids
 
         if config_step:
@@ -287,19 +286,19 @@ class WebsiteProductConfig(http.Controller):
 
         vals_dict = {
             int(field_name.split(self.attr_field_prefix)[1]): val
-            for field_name, val in parsed_vals['cfg_vals'].items()
+            for field_name, val in list(parsed_vals['cfg_vals'].items())
         }
 
         custom_vals_dict = {
             int(field_name.split(self.custom_attr_field_prefix)[1]): val
-            for field_name, val in parsed_vals['custom_vals'].items()
+            for field_name, val in list(parsed_vals['custom_vals'].items())
         }
 
         binary_custom_vals = cfg_session.custom_value_ids.filtered(
             lambda x: x.attachment_ids)
 
         # Ignore empty vals for attachments if they are already on the session
-        for attr_id in custom_vals_dict.keys():
+        for attr_id in list(custom_vals_dict.keys()):
             val = custom_vals_dict[attr_id]
             if not val and attr_id in binary_custom_vals.ids:
                 del custom_vals_dict[attr_id]
@@ -564,7 +563,7 @@ class WebsiteProductConfig(http.Controller):
         json_config = self.get_json_config(
             product_tmpl, cfg_vals, config_step)
         value_ids = product_tmpl.flatten_val_ids(
-            json_config.get('attr_vals', {}).values())
+            list(json_config.get('attr_vals', {}).values()))
         return self.get_config_image(product_tmpl, value_ids, size)
 
     def configure_product(self, product_tmpl, value_ids, custom_vals=None):

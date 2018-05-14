@@ -23,7 +23,7 @@ For this installation example we will assume that our Odoo server path will be a
 
     In your server *".conf"* file on the *"addons_path"* line add the path to the Product Configurator module (*"/odoo/9.0/extra-addons/product-configurator"*).
 
-    The addons path line should look like this *"addons_path = /odoo/9.0/server/openerp/addons,/odoo/9.0/server/addons,/odoo/9.0/extra-addons/product-configurator"*.
+    The addons path line should look like this *"addons_path = /odoo/9.0/server/odoo/addons,/odoo/9.0/server/addons,/odoo/9.0/extra-addons/product-configurator"*.
 
 
 4. Make the Product configurator module available in your Odoo instance:
